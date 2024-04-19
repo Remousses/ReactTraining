@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+      const MyApp = () => {
+        const name = 'Rémy';
+        const user = { name, avatar: 'https://i.pravatar.cc/100'}
+
+        const Welcome = ({name, age}) => {
+            const start = <span>Hello {name ? name : 'Inconnu'}</span>
+
+            // if (age) {
+            //     return <h1>{start}, tu as {age} ans</h1>
+            // }
+
+            return <h1>
+                {start}
+                {age ? <span>, tu as {age} ans</span> : <span>, tu n'as pas d'âge</span>}
+            </h1>;
+        }
+
+        const Card = ({children}) => {
+            return <div>
+                {children}
+            </div>
+        }
+
+        const peoples = ['Maria', 'Matthieu', 'Rémy'];
+        // const contacts = {test : 'Rémy'};
+
+        return <> {/* Ceux-ci est un fragment vide un peut comme ng-container */}
+            <Welcome name={name} age={25} />
+            <Welcome name="Toto" />
+            <Welcome />
+            <img className="avatar" src={user.avatar} alt={user.name} style={{borderRadius: 50}} />
+            <h2>Il est {new Date().toLocaleTimeString()}</h2>
+            <Card>
+                <h1>Yop</h1>
+                <Welcome />
+            </Card>
+            <ul>
+                {peoples.map((people) => 
+                    <li>{people}</li>
+                )}
+            </ul>
+            
+        </>;
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<MyApp />);
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this page for starting a new React project with JSX:
+      https://react.dev/learn/start-a-new-react-project
+
+      Read this page for adding React with JSX to an existing project:
+      https://react.dev/learn/add-react-to-an-existing-project
+    -->
+  </body>
+</html>
